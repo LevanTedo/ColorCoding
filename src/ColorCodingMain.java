@@ -173,6 +173,7 @@ public class ColorCodingMain {
 		if(l<(Math.log(l/delta)/Math.log(2))){
 			return colorCoding(L,t,l,delta);
 		}
+		System.out.println("Log: " + l/(Math.log(l/delta)/Math.log(2)) );
 		int m = nextPowerOf2(l/(Math.log(l/delta)/Math.log(2)));
 		ArrayList<Item>[] A = new ArrayList[m+1];
 		for (int a = 0; a <= m; a++) { 
@@ -189,14 +190,14 @@ public class ColorCodingMain {
 			capacity = t;
 		}
 
-		int[][] P = new int[m][];
-		for(int j = 1;j<m;j++){
+		int[][] P = new int[m+1][];
+		for(int j = 1;j<=m;j++){
 			Item[] aArray = A[j].toArray(new Item[A[j].size()]);
 			P[j] = colorCoding(aArray, capacity, gamma, delta/l); // sehr hohe zahlen
 		}
-		for(int h = 1;h<(Math.log(m)/Math.log(2));h++){
-			for(int j = 1;j<m/Math.pow(2, h);j++){
-				P[j] = maxConvDomain(P[(2*j)-1], P[2*j], (int)Math.pow(2, h)*2*gamma*t/l);
+		for(int h = 1;h<=(Math.log(m)/Math.log(2));h++){
+			for(int j = 1;j<=m/Math.pow(2, h);j++){
+				P[j] = maxConvDomain(P[(2*j)-1], P[2*j], (int)Math.pow(2, h)*2*gamma*t/l); //TODO hier läuft irgendwas schief
 			}
 		}
 		return P[1];
@@ -301,7 +302,7 @@ public class ColorCodingMain {
 		}
 	}
     public static void main(String[] args) {
-		String user = "C:\\Users\\levan\\Desktop\\knapsack\\Knapsack\\";
+		String user = "C:\\Users\\levan\\OneDrive\\Desktop\\colorcoding\\"; // directory für die testdaten
 		String[] itemsLargeScale = { "large_scale\\knapPI_1_100_1000_1",
 				"large_scale\\knapPI_1_200_1000_1",
 				"large_scale\\knapPI_1_500_1000_1",
@@ -366,7 +367,7 @@ public class ColorCodingMain {
 				"low-dimensional-optimum\\f9_l-d_kp_5_80",
 				"low-dimensional-optimum\\f10_l-d_kp_20_879" };
 
-		String logFile = "C:\\Users\\levan\\Desktop\\knapsack\\Knapsack\\Log.txt"; // Pfad zur Logdatei
+		String logFile = "C:\\Users\\levan\\OneDrive\\Desktop\\colorcoding\\Log.txt"; // Pfad zur Logdatei
 
 		try {
 			String[] testSet = {};
