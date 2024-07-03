@@ -1,0 +1,10 @@
+Als erstes werden die Items in log n layer geteilt. Das Layer L[i] beinhaltet die items mit gewicht in 
+(t/2^i,t/2^i-1] für 0 < i < log n und [0,t/2^log n-1] für L[log n].
+Auf jedem dieser Layer wird der ColorCodingLayer Algorithmus ausgeführt, um für jedes Layer das Profitarray N(L[i]) 
+zu bestimmen. Für kleinere Itemsets wird direkt auf das gesamte Layer der Colorcoding Algorithmus angewandt.
+Der Colorcoding algorithmus nimmt die Items aus dem übergebenen Layer und teilt sie zufällig auf k^2 subsets 
+der größe t auf. In diesen Subsets wird der Wert des Items an der dem gewicht entsprechenden stelle gespeichert, 
+also Z[Item.Gewicht] = Item.Wert
+Anschließend wird auf alle diese Subsets, wie in einem Binary Tree, MaxConvolution angewandt und das ergebnis in einem
+Array P gespeichert. Dieser Prozess des zufälligen aufteilens mit anschließender Maxconvolution wird Log(1/delta)/Log(4/3)
+mal wiederholt und die ergebnisarrays werden alle in P gespeichert. Das anschließende Ergebnis des ColorCoding Algorithmusses ist der 
